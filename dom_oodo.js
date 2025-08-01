@@ -2,15 +2,16 @@ const saleteam = [
   "Lưu Phan Hoàng Phúc",
   "Nguyễn Thị Linh Đan",
   "Lê Đinh Ý Nhi",
+  "Lê Nguyễn Kim Thuy",
   "Mai Thị Nữ",
-  "Nguyễn Thị Hà Miên",
 ];
 const saleAvatar = {
   "Lưu Phan Hoàng Phúc": "./DOM-img/phuc.jpg",
   "Nguyễn Thị Linh Đan": "./DOM-img/dan.jpg",
   "Lê Đinh Ý Nhi": "./DOM-img/ynhi.jpg",
   "Mai Thị Nữ": "./DOM-img/nu.jpg",
-  "Nguyễn Thị Hà Miên": "./DOM-img/hamien.png",
+  "Lê Nguyễn Kim Thuy":
+    "https://i.pinimg.com/736x/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg",
 };
 const tagName = {
   126: "Status - New",
@@ -148,6 +149,12 @@ function checkDateTime(type) {
 
 async function fetchWonLeadsThisYear() {
   try {
+    // Lấy domain gốc từ hàm checkDateTime("won")
+    const domain = checkDateTime("won");
+
+    // Thêm điều kiện salesteam (team_id)
+    domain[0].push(["team_id", "=", 26]);
+
     const response = await fetch(PROXY, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -159,7 +166,7 @@ async function fetchWonLeadsThisYear() {
           params: {
             model: "crm.lead",
             method: "search_read",
-            args: checkDateTime("won"),
+            args: domain,
             kwargs: {
               fields: [
                 "name",
@@ -199,7 +206,7 @@ async function fetchWonLeadsThisYear() {
         const month = new Date(lead.date_last_stage_update).getMonth();
         monthlyWonCounts[month]++;
       }
-      if (lead.partner_id[0]) partnerIds.add(lead.partner_id[0]);
+      if (lead.partner_id?.[0]) partnerIds.add(lead.partner_id[0]);
     }
 
     // Chạy fetch hóa đơn song song với vẽ biểu đồ
@@ -207,12 +214,13 @@ async function fetchWonLeadsThisYear() {
 
     drawWonLeadsChart(monthlyWonCounts);
 
-    return await invoicePromise; // Đợi fetch hóa đơn xong
+    return await invoicePromise;
   } catch (error) {
     console.error("Lỗi khi fetch lead:", error);
     return [];
   }
 }
+
 const today = new Date();
 const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
   .toISOString()
@@ -224,6 +232,7 @@ const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0)
 // 🟢 HÀM 1: Lấy danh sách partner_id từ hóa đơn chưa thanh toán trong tháng
 async function fetchUnpaidInvoicesThisMonth() {
   try {
+    // 1. Lấy hóa đơn trong tháng
     const response = await fetch(PROXY, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -247,16 +256,54 @@ async function fetchUnpaidInvoicesThisMonth() {
 
     const data = await response.json();
     const allInvoices = data.result || [];
-    console.log(allInvoices);
-    // Lấy danh sách partner_id duy nhất
+    console.log("Tất cả hóa đơn:", allInvoices);
+
+    // 2. Lấy danh sách partner_id duy nhất
     const partnerIds = [
       ...new Set(allInvoices.map((inv) => inv.partner_id?.[0]).filter(Boolean)),
     ];
 
-    const { leads, newPartnerIds } = await fetchStudentsFromCRM(partnerIds);
-    console.log(leads, newPartnerIds);
+    // 3. Lấy thông tin leads từ CRM có team_id = 26
+    const leadsDomain = [
+      [
+        ["partner_id", "in", partnerIds],
+        ["team_id", "=", 26],
+      ],
+    ];
+    const leadsRes = await fetch(PROXY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        endpoint: "/web/dataset/call_kw",
+        data: {
+          jsonrpc: "2.0",
+          method: "call",
+          params: {
+            model: "crm.lead",
+            method: "search_read",
+            args: leadsDomain,
+            kwargs: {
+              fields: ["id", "partner_id", "team_id"],
+              limit: 0,
+            },
+          },
+        },
+      }),
+    });
 
-    const invoicePromise = await fetchInvoicesByLeadIds(newPartnerIds, leads);
+    const leadsData = await leadsRes.json();
+    const leads = leadsData.result || [];
+
+    // 4. Lọc lại partnerIds chỉ thuộc team_id = 26
+    const filteredPartnerIds = [
+      ...new Set(leads.map((l) => l.partner_id?.[0]).filter(Boolean)),
+    ];
+
+    // 5. Lấy hóa đơn chi tiết cho các partnerIds này
+    const invoicePromise = await fetchInvoicesByLeadIds(
+      filteredPartnerIds,
+      leads
+    );
     return invoicePromise;
   } catch (error) {
     console.error("Lỗi khi fetch hóa đơn chưa thanh toán:", error);
@@ -568,7 +615,7 @@ async function fetchLeads() {
   const domain = checkDateTime("normal");
 
   // Thêm điều kiện salesteam (team_id)
-  domain[0].push(["team_id", "=", 23]); // 5 là ID của "Dự án MBA/EMBA IDEAS"
+  domain[0].push(["team_id", "=", 26]);
 
   const response = await fetch(PROXY, {
     method: "POST",
