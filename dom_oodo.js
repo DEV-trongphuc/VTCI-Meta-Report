@@ -3,8 +3,8 @@ const saleteam = [
   "Nguyễn Thị Linh Đan",
   "Lê Đinh Ý Nhi",
   "Lê Nguyễn Kim Thuy",
-  "Mai Thị Nữ",
   "Nguyễn Ngọc Quỳnh",
+  "Mai Thị Nữ",
 ];
 const saleAvatar = {
   "Lưu Phan Hoàng Phúc": "./DOM-img/phuc.jpg",
