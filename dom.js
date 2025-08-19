@@ -885,7 +885,7 @@ function renderMetricTotal(e, t, a) {
             : `${isNaN(n) ? "0" : formatNumber(n)}`
         }\n</p>\n        </div>\n        <div class="dom_total_unit">\n          ${
           "Spent" === o
-            ? '<a class="dom_unit_number">Excludes +5% VAT</a>'
+            ? '<a class="dom_unit_number">Excludes +10% VAT</a>'
             : `<p class="dom_unit_number">${
                 "-" !== o ? `${formatNumber(o)} ₫` : o
               }</p>`
@@ -1856,7 +1856,7 @@ function renderDomPayment(e) {
   const t = e.funding_source_details?.display_string.includes("VISA");
   dom_payment_block.innerHTML = `\n      <div class="dom_block">\n          <div class="dom_block_item w25">\n            <h2>Current Debt Balance</h2>\n            <div class="dom_balance">\n              <p>\n                <i class="fa-solid fa-money-check-dollar"></i>\n                <span class="dom_balance_current">${formatCurrency(
     e.balance
-  )}</span>\n                <span>+5% VAT</span>\n              </p>\n              <div>\n                <p>Total Account Spent</p>\n                <p class="dom_balance_total">${formatCurrency(
+  )}</span>\n                <span>+10% VAT</span>\n              </p>\n              <div>\n                <p>Total Account Spent</p>\n                <p class="dom_balance_total">${formatCurrency(
     e.amount_spent
   )} <span>(Inc. VAT)</span></p>\n                 <p class="small">Facebook only returns 37 months ago</p>\n              </div>\n            </div>\n          </div>\n\n          <div class="dom_block_item w25">\n            <h2>Payment info</h2>\n            <div class="dom_payment_info">\n            <p> \n      <img src="https://ampersand-reports-dom.netlify.app/DOM-img/${
     t ? "visa.png" : "mastercard.png"
@@ -1881,3 +1881,4 @@ function renderDomPayment(e) {
   }</li>\n              </ul>\n            </div>\n          </div>\n        </div>\n  `;
 }
 getStartEndFromURL(), mainApp(), fetchDataMonthly(year);
+
