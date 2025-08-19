@@ -4,6 +4,7 @@ const saleteam = [
   "Lê Đinh Ý Nhi",
   "Lê Nguyễn Kim Thuy",
   "Mai Thị Nữ",
+  "Nguyễn Ngọc Quỳnh",
 ];
 const saleAvatar = {
   "Lưu Phan Hoàng Phúc": "./DOM-img/phuc.jpg",
@@ -11,6 +12,8 @@ const saleAvatar = {
   "Lê Đinh Ý Nhi": "./DOM-img/ynhi.jpg",
   "Mai Thị Nữ": "./DOM-img/nu.jpg",
   "Lê Nguyễn Kim Thuy":
+    "https://i.pinimg.com/736x/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg",
+  "Nguyễn Ngọc Quỳnh":
     "https://i.pinimg.com/736x/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg",
 };
 const tagName = {
@@ -736,30 +739,30 @@ function renderWon(leads) {
     const saleperson = lead.user_id ? lead.user_id[1] : "Khác";
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${formatDate(lead.date_last_stage_update) || ""}</td>
-      <td>${formatDate(lead.create_date) || ""}</td>
-      <td>${
-        `${
-          lead.conversion_days
-            ? `${formatNumber(lead.conversion_days)} days`
-            : "Unpaid"
-        }` || ""
-      }</td>
-      <td> <span style="background: ${makeColorWon(
-        getTagDisplayWon(lead.tag_ids)
-      )}"></span>${getTagDisplayWon(lead.tag_ids) || ""}</td>
-      <td>${lead.contact_name || ""}</td>
-      <td>${lead.stage_id[1] || ""}</td>
-      <td>${formatCurrency(lead.amount_total_month) || ""}</td>
-      <td>${formatCurrency(lead.amount_total_signed) || ""}</td>
-      <td>${formatCurrency(lead.amount_total_pre) || ""}</td>
-      <td> <img src="${
-        saleAvatar[saleperson]
-      }"/> <span>${saleperson}</span></td>
-      <td>${lead.source_id[1] || ""}</td>
-      <td>${lead.campaign_id[1] || ""}</td>
-      <td>${lead.medium_id[1] || ""}</td>
-    `;
+        <td>${formatDate(lead.date_last_stage_update) || ""}</td>
+        <td>${formatDate(lead.create_date) || ""}</td>
+        <td>${
+          `${
+            lead.conversion_days
+              ? `${formatNumber(lead.conversion_days)} days`
+              : "Unpaid"
+          }` || ""
+        }</td>
+        <td> <span style="background: ${makeColorWon(
+          getTagDisplayWon(lead.tag_ids)
+        )}"></span>${getTagDisplayWon(lead.tag_ids) || ""}</td>
+        <td>${lead.contact_name || ""}</td>
+        <td>${lead.stage_id[1] || ""}</td>
+        <td>${formatCurrency(lead.amount_total_month) || ""}</td>
+        <td>${formatCurrency(lead.amount_total_signed) || ""}</td>
+        <td>${formatCurrency(lead.amount_total_pre) || ""}</td>
+        <td> <img src="${
+          saleAvatar[saleperson]
+        }"/> <span>${saleperson}</span></td>
+        <td>${lead.source_id[1] || ""}</td>
+        <td>${lead.campaign_id[1] || ""}</td>
+        <td>${lead.medium_id[1] || ""}</td>
+      `;
     tbody.appendChild(row);
   });
   document.querySelector(".loading").classList.remove("active");
@@ -792,22 +795,22 @@ function renderNextPaid(leads) {
     const saleperson = lead.user_id ? lead.user_id[1] : "Khác";
     const row = document.createElement("tr");
     row.innerHTML = `
-    <td>${lead.contact_name || ""}</td>
-      <td> <span style="background: ${makeColorWon(
-        getTagDisplayWon(lead.tag_ids)
-      )}"></span>${getTagDisplayWon(lead.tag_ids) || ""}</td>
-      <td>${formatDate(lead.next_invoice) || ""}</td>
-      <td>${formatCurrency(lead.amount_next) || ""}</td>
-      <td>${formatCurrency(lead.amount_debt) || ""}</td>
-      <td>${formatCurrency(lead.amount_total_signed) || ""}</td>
-      <td>${formatCurrency(lead.amount_total_pre) || ""}</td>
-      <td> <img src="${
-        saleAvatar[saleperson]
-      }"/> <span>${saleperson}</span></td>
-      <td>${lead.source_id[1] || ""}</td>
-      <td>${lead.campaign_id[1] || ""}</td>
-      <td>${lead.medium_id[1] || ""}</td>
-    `;
+      <td>${lead.contact_name || ""}</td>
+        <td> <span style="background: ${makeColorWon(
+          getTagDisplayWon(lead.tag_ids)
+        )}"></span>${getTagDisplayWon(lead.tag_ids) || ""}</td>
+        <td>${formatDate(lead.next_invoice) || ""}</td>
+        <td>${formatCurrency(lead.amount_next) || ""}</td>
+        <td>${formatCurrency(lead.amount_debt) || ""}</td>
+        <td>${formatCurrency(lead.amount_total_signed) || ""}</td>
+        <td>${formatCurrency(lead.amount_total_pre) || ""}</td>
+        <td> <img src="${
+          saleAvatar[saleperson]
+        }"/> <span>${saleperson}</span></td>
+        <td>${lead.source_id[1] || ""}</td>
+        <td>${lead.campaign_id[1] || ""}</td>
+        <td>${lead.medium_id[1] || ""}</td>
+      `;
     tbody.appendChild(row);
   });
   updateNextInvoiceTableFooter(leads);
@@ -826,32 +829,32 @@ function renderExpected(leads) {
     const saleperson = lead.user_id ? lead.user_id[1] : "Khác";
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${formatDate(lead.date_last_stage_update) || ""}</td>
-      <td>${formatDate(lead.create_date) || ""}</td>
-      <td>${
-        `${
-          lead.conversion_days
-            ? `${formatNumber(lead.conversion_days)} days`
-            : "No Invoice"
-        }` || ""
-      }</td>
-      <td> <span style="background: ${makeColorWon(
-        getTagDisplayWon(lead.tag_ids)
-      )}"></span>${getTagDisplayWon(lead.tag_ids) || ""}</td>
-      <td>${lead.contact_name || ""}</td>
-      <td>${lead.email_from || ""}</td>
-      <td>${lead.phone || ""}</td>
-      <td>${lead.stage_id[1] || ""}</td>
-      <td>${formatCurrency(lead.expected_revenue) || ""}</td>
-      <td>${lead.probability}%</td>
-      <td>${formatCurrency(lead.amount_total_pre) || ""}</td>
-      <td> <img src="${
-        saleAvatar[saleperson]
-      }"/> <span>${saleperson}</span></td>
-      <td>${lead.source_id[1] || ""}</td>
-      <td>${lead.campaign_id[1] || ""}</td>
-      <td>${lead.medium_id[1] || ""}</td>
-    `;
+        <td>${formatDate(lead.date_last_stage_update) || ""}</td>
+        <td>${formatDate(lead.create_date) || ""}</td>
+        <td>${
+          `${
+            lead.conversion_days
+              ? `${formatNumber(lead.conversion_days)} days`
+              : "No Invoice"
+          }` || ""
+        }</td>
+        <td> <span style="background: ${makeColorWon(
+          getTagDisplayWon(lead.tag_ids)
+        )}"></span>${getTagDisplayWon(lead.tag_ids) || ""}</td>
+        <td>${lead.contact_name || ""}</td>
+        <td>${lead.email_from || ""}</td>
+        <td>${lead.phone || ""}</td>
+        <td>${lead.stage_id[1] || ""}</td>
+        <td>${formatCurrency(lead.expected_revenue) || ""}</td>
+        <td>${lead.probability}%</td>
+        <td>${formatCurrency(lead.amount_total_pre) || ""}</td>
+        <td> <img src="${
+          saleAvatar[saleperson]
+        }"/> <span>${saleperson}</span></td>
+        <td>${lead.source_id[1] || ""}</td>
+        <td>${lead.campaign_id[1] || ""}</td>
+        <td>${lead.medium_id[1] || ""}</td>
+      `;
     tbody.appendChild(row);
   });
   updateExpectTableFooter(leads);
@@ -881,18 +884,18 @@ function updateTableFooter(leads) {
   // Tạo tfoot mới
   const tfoot = document.createElement("tfoot");
   tfoot.innerHTML = `
-      <tr>
-        <td style="text-align:center" colspan="3"><strong>TOTAL ${totalLeads} ROW</strong></td>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-        <td><strong>${formatCurrency(totalMonth)}</strong></td>
-        <td><strong>${formatCurrency(totalAmount)}</strong></td>
-        <td><strong>${formatCurrency(totalPreAmount)}</strong></td>
-        <td ></td>
-        <td colspan="3"></td>
-      </tr>
-    `;
+        <tr>
+          <td style="text-align:center" colspan="3"><strong>TOTAL ${totalLeads} ROW</strong></td>
+          <td ></td>
+          <td ></td>
+          <td ></td>
+          <td><strong>${formatCurrency(totalMonth)}</strong></td>
+          <td><strong>${formatCurrency(totalAmount)}</strong></td>
+          <td><strong>${formatCurrency(totalPreAmount)}</strong></td>
+          <td ></td>
+          <td colspan="3"></td>
+        </tr>
+      `;
 
   // Thêm vào bảng
   tableOodo.appendChild(tfoot);
@@ -930,18 +933,18 @@ function updateNextInvoiceTableFooter(leads) {
   // Tạo tfoot mới
   const tfoot = document.createElement("tfoot");
   tfoot.innerHTML = `
-      <tr>
-        <td style="text-align:center" colspan="3"><strong>TOTAL ${totalLeads} ROW</strong></td>
-        <td><strong>${formatCurrency(totalNext)}</strong></td>
-        <td><strong>${formatCurrency(totalDebt)}</strong></td>
-        <td><strong>${formatCurrency(totalPaid)}</strong></td>
-        <td><strong>${formatCurrency(totalPreAmount)}</strong></td>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-        <td colspan="3"></td>
-      </tr>
-    `;
+        <tr>
+          <td style="text-align:center" colspan="3"><strong>TOTAL ${totalLeads} ROW</strong></td>
+          <td><strong>${formatCurrency(totalNext)}</strong></td>
+          <td><strong>${formatCurrency(totalDebt)}</strong></td>
+          <td><strong>${formatCurrency(totalPaid)}</strong></td>
+          <td><strong>${formatCurrency(totalPreAmount)}</strong></td>
+          <td ></td>
+          <td ></td>
+          <td ></td>
+          <td colspan="3"></td>
+        </tr>
+      `;
   tableOodo.appendChild(tfoot);
 
   // Gọi hàm vẽ biểu đồ
@@ -1262,22 +1265,22 @@ function updateExpectTableFooter(leads) {
   // Tạo tfoot mới
   const tfoot = document.createElement("tfoot");
   tfoot.innerHTML = `
-      <tr>
-        <td style="text-align:center" colspan="3"><strong>TOTAL ${totalLeads} ROW</strong></td>
+        <tr>
+          <td style="text-align:center" colspan="3"><strong>TOTAL ${totalLeads} ROW</strong></td>
+          <td ></td>
+          <td ></td>
+          <td ></td>
+          <td ></td>
+          <td ></td>
+          <td><strong>${formatCurrency(totalMonth)}</strong></td>
+         <td ></td>
         <td ></td>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-        <td><strong>${formatCurrency(totalMonth)}</strong></td>
-       <td ></td>
-      <td ></td>
-       <td ></td>
-        <td ></td>
-        <td ></td>
-        <td colspan="3"></td>
-      </tr>
-    `;
+         <td ></td>
+          <td ></td>
+          <td ></td>
+          <td colspan="3"></td>
+        </tr>
+      `;
 
   // Thêm vào bảng
   tableOodo.appendChild(tfoot);
