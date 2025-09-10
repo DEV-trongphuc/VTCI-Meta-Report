@@ -153,10 +153,12 @@ function checkDateTime(type) {
 async function fetchWonLeadsThisYear() {
   try {
     // Lấy domain gốc từ hàm checkDateTime("won")
-    const domain = checkDateTime("won");
+    let domain = checkDateTime("won");
 
-    // Thêm điều kiện salesteam (team_id)
+    // Thêm điều kiện: team_id = 26 OR tag_ids có 203
+    domain[0].push("|");
     domain[0].push(["team_id", "=", 26]);
+    domain[0].push(["tag_ids", "in", [203]]);
 
     const response = await fetch(PROXY, {
       method: "POST",
@@ -223,6 +225,7 @@ async function fetchWonLeadsThisYear() {
     return [];
   }
 }
+
 
 const today = new Date();
 const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
