@@ -7,7 +7,7 @@ const quickFilter = [
   "Pagelike",
 ];
 const accessToken =
-  "EAAOahG2GiWkBPGVhHhxkQTXsgIkiqVEmdRjABTuQVDHTDshQZBvchHuSsZCl0V3gWQpiSMb7qYQg1mdliCw8tdUICJEYrCqOaFrN4MbZCseCXzOGy9r07HDAo1rUs4q0yqerZBwln4iQlaTlubVZA2llHZBjmYRxYlfWBhLUOjlGrFxacZC8ZC5jvZAkBISrM7QArSKHNLt7q"; // Token của bạn
+  "EAAQwS9m6tIABPkpvRZAkiownqywAtZAs0kFucs551zmpV8E3Bv17ohjVkXUUoPZBmDQhImxjTaJIu085njYkh4y0zEeSJ5zA30gvQSnxp3kcVznTI1xLJdZChZBIJlQUhaZAKRIHwoaH5tjIuXticERFNx1p8DJlur11x4CPRvZAJUyAXj5lKhEzRAhPW9b5txscB2mxsJ3dOUXWfRixNZBfdTaL"; // Token của bạn
 
 let isBrand = false;
 const accName = "Viện VTCI";
