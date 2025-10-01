@@ -60,7 +60,7 @@ async function loginOdoo() {
         params: {
           db: "IBM_Prod",
           login: "thaing@ideas.edu.vn",
-          password: "Ideas@812",
+          password: "12345",
         },
       },
     }),
