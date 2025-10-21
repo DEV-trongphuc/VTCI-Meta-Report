@@ -18,27 +18,36 @@
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 
     <link
       rel="icon"
       href="https://dom-marketing.netlify.app/img/domfavicon.png"
       type="image/png"
     />
-    <link rel="stylesheet" href="https://dom-marketing.netlify.app/SAVE/dom.css" />
+    <link rel="stylesheet" href="https://dom-marketing.netlify.app//SAVE/dom.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   </head>
   <body>
     <main id="dom" class="">
+      <div class="dom_warning">
+        <p>
+          <i class="fa-solid fa-bolt"></i> <span> View High CPM Adsets </span>
+        </p>
+      </div>
       <div id="dom_sidebar">
         <div class="dom_logo">
           <img
-            src="https://ampersand-reports-dom.netlify.app/DOM-img/DOM_LOGO.png"
+            src="https://dom-marketing.netlify.app/img/DOM_LOGO.png"
             alt="Dom Marketing Logo"
           />
           <i class="fa-regular fa-square-caret-left"></i>
         </div>
-        <div class="dom_account_view"></div>
+        <div class="dom_account_view">
+          <div class="dom_account_view_block"></div>
+          <ul></ul>
+        </div>
         <div class="dom_menu">
           <span class="dom_menu_text">Main Menu</span>
           <ul class="dom_main_menu">
@@ -50,9 +59,6 @@
             </li>
             <li>
               <i class="fa-solid fa-money-check"></i> <span> Account Info</span>
-            </li>
-            <li>
-              <i class="fa-solid fa-graduation-cap"></i> <span> Oodo CRM</span>
             </li>
           </ul>
           <span class="dom_menu_text">Quick Filter</span>
@@ -103,10 +109,17 @@
           </div>
           <p id="dom_time_show">01/01/2024</p>
         </div>
+
         <div class="dom_user">
           <p>DOM</p>
-          <img src="" />
+          <img src="https://dom-marketing.netlify.app/img/dom_avatar.jpg" />
           <ul>
+            <li id="accounts_btn">
+              <a>
+                <i class="fa-solid fa-rectangle-list"></i>
+                <span>Accounts</span>
+              </a>
+            </li>
             <!-- <li>
               <a href="javascript:;" id="dom_role">
                 <i class="fa-solid fa-feather"></i>
@@ -180,12 +193,16 @@
         </div>
         <div class="dom_block spent_chart">
           <div class="dom_block_item w50">
-            <h2>Cost spent by Optimization Goal</h2>
+            <h2>
+              <i class="fa-solid fa-chart-simple title_icon"></i> Cost spent
+            </h2>
             <canvas id="chartSpentType"></canvas>
           </div>
           <div class="dom_block_item w50">
             <div class="dom_switch">
-              <h2>Highest spent</h2>
+              <h2>
+                <i class="fa-solid fa-ranking-star title_icon"></i> Top spent
+              </h2>
               <div class="dom_switch_btns">
                 <p class="active">Campaigns</p>
                 <p>Adsets</p>
@@ -240,7 +257,9 @@
         </div>
         <div class="dom_block mainView">
           <div class="dom_block_item w100">
-            <h2>Cost spent by Optimization Goal</h2>
+            <h2>
+              <i class="fa-solid fa-chart-line title_icon"></i> Daily Chart
+            </h2>
             <div class="dom_selected daily">
               <span class="dom_selected_text">View Spent</span>
               <i class="fa-solid fa-angle-down"></i>
@@ -276,7 +295,10 @@
         </div>
         <div class="dom_table">
           <div class="dom_table_head">
-            <h2>Detail Data Adset</h2>
+            <h2>
+              <i class="fa-solid fa-rectangle-list title_icon"></i> Detail Data
+              Adset
+            </h2>
             <div>
               <input
                 class="dom_search"
@@ -346,7 +368,10 @@
         <div class="dom_payment_block"></div>
         <div class="dom_block">
           <div class="dom_block_item w100">
-            <h2>Advertising by month</h2>
+            <h2>
+              <i class="fa-solid fa-chart-simple title_icon"></i> Advertising by
+              month
+            </h2>
             <div class="dom_block_item_wrap">
               <div class="dom_selected monthly">
                 <span class="dom_selected_text">View Spent</span>
@@ -388,234 +413,127 @@
           </div>
         </div>
       </div>
-      <div id="dom_oodo" class="none">
-        <div class="dom_block">
-          <div class="dom_block_item w100 oodo">
-            <div class="">
-              <a
-                href="https://erp.ideas.orissolution.com/web/login"
-                target="_blank"
-              >
-                <img class="logo_oodo" src="./DOM-img/Odoo-Logo.wine.png"
-              /></a>
-              <h2>
-                <i class="fa-solid fa-user-tie title_icon"></i> Total Leads
-                Created: <span class="oodo_total">Data...</span>
-              </h2>
-              <div id="progressBar">
-                <p class="segment"></p>
-                <p class="segment"></p>
-                <p class="segment"></p>
-                <p class="segment"></p>
-                <p class="segment"></p>
-              </div>
-              <div class="progess_label">
-                <p>
-                  <span style="background: rgba(255, 99, 132, 1)"></span>Needed:
-                  <b>-</b>
-                </p>
-                <p>
-                  <span style="background: rgb(255, 68, 0)"></span>Status - New:
-                  <b>-</b>
-                </p>
-                <p>
-                  <span style="background: rgb(108, 0, 86)"></span>Bad-Timing:
-                  <b>-</b>
-                </p>
-                <p>
-                  <span style="background: rgb(229, 217, 0)"></span>Unqualified:
-                  <b>-</b>
-                </p>
-                <p>
-                  <span style="background: rgb(0, 0, 0)"></span>Junk:
-                  <b>-</b>
-                </p>
-              </div>
-            </div>
+      <div class="dom_accounts">
+        <div class="dom_accounts_head">
+          <img src="https://dom-marketing.netlify.app/img/DOM_LOGO.png" />
+          <p>Manager Ad Account</p>
+        </div>
+        <div class="dom_accounts_sync">
+          <p class="dom_accounts_p">Your Ad Account</p>
+        </div>
+        <div class="dom_accounts_list"></div>
+        <div class="dom_accounts_btns">
+          <p class="dom_accounts_btn_close">Close</p>
+          <div class="dom_accounts_btnsadd">
+            <p>
+              <i
+                class="fa-solid fa-mobile-screen-button dom_accounts_btn_qr"
+                title="Sync to Mobile"
+              ></i>
+            </p>
+            <p>
+              <i
+                class="fa-solid fa-copy dom_accounts_btn_coppy"
+                title="Copy All Accounts"
+              ></i>
+            </p>
+            <p>
+              <i
+                class="fa-solid fa-file-import dom_accounts_btn_import"
+                title="Import All Accounts"
+              ></i>
+            </p>
+            <p class="dom_accounts_btn_add">Add+</p>
           </div>
         </div>
-        <div class="dom_block">
-          <div class="dom_block_item w50">
-            <h2>
-              <i class="fa-solid fa-headset title_icon"></i> Saleperson - Lead
-              &amp; Needed
-            </h2>
-            <canvas id="leadChart"></canvas>
+        <div class="dom_accounts_add">
+          <div class="dom_accounts_add_head">
+            <img
+              class="dom_login_avatar"
+              src="https://ampersand-reports-dom.netlify.app/DOM-img/DOM_LOGO.png"
+            />
+            <i class="fa-solid fa-circle-chevron-left dom_close"></i>
           </div>
-          <div class="dom_block_item w50">
-            <div class="dom_highest_switch">
-              <h2><i class="fa-solid fa-tag title_icon"></i> Detail Tags</h2>
-              <div class="">
-                <p class="sale_switch active">Phúc</p>
-                <p class="sale_switch">Đan</p>
-                <p class="sale_switch">Nhi</p>
-                <p class="sale_switch">Thuy</p>
-                <p class="sale_switch">Quỳnh</p>
-              </div>
-            </div>
-            <ul class="dom_toplist oodo"></ul>
-          </div>
-        </div>
-        <div class="dom_block main_odoo">
-          <div class="dom_block_item w100 oodo table">
-            <div class="dom_table target">
-              <div class="dom_table_head">
-                <h2>
-                  <i class="fa-solid fa-table title_icon"></i> Detail Won &
-                  TSSAC
-                </h2>
-                <div class="dow_oodo_btns">
-                  <div class="dom_show_chartbtns main_odoo">
-                    <p class="active">Table</p>
-                    <p>Chart</p>
-                  </div>
-                  <p id="ex_won_table">
-                    <i class="fa-solid fa-file-excel"></i>
-                  </p>
-                </div>
-              </div>
-              <div class="dom_selected leadchart">
-                <span class="dom_selected_text">Students</span>
-                <i class="fa-solid fa-angle-down"></i>
-                <ul class="dom_select_show leadchart">
-                  <li data-view="Students" class="active">
-                    <span class="radio_box"></span><span>Students</span>
-                  </li>
-                  <li data-view="Paid in time">
-                    <span class="radio_box"></span><span>Paid in time</span>
-                  </li>
+          <div class="dom_form_wrapper">
+            <label>
+              <span>Access Token</span>
+              <input type="text" id="access_token" />
+            </label>
+            <a href="#">Hướng dẫn lấy Access Token</a>
+            <label class="dom_add_id" for="add_id">
+              <input type="checkbox" id="add_id" />
+              <span>Add by Ad Account ID</span>
+            </label>
+            <label>
+              <span>Ad ID</span>
+              <input type="text" id="ad_id" />
+            </label>
 
-                  <li data-view="Total Paid">
-                    <span class="radio_box"></span><span>Total Paid</span>
-                  </li>
-                  <li data-view="Expected Revenue">
-                    <span class="radio_box"></span><span>Expected Revenue</span>
-                  </li>
-                </ul>
-              </div>
-              <canvas id="wonbyProgramChart"></canvas>
-              <div class="dom_table_box">
-                <div class="dom_table_container">
-                  <table id="won_table" class="table oodo">
-                    <thead>
-                      <tr>
-                        <th>Won Date</th>
-                        <th>Create Date</th>
-                        <th>Days First Invoice</th>
-                        <th>Program</th>
-                        <th>Name</th>
-                        <th>Stage</th>
-                        <th>Paid in Timerange</th>
-                        <th>Total Paid</th>
-                        <th>Expected Revenue</th>
-                        <th>Saleperson</th>
-                        <th>Source</th>
-                        <th>Campaign</th>
-                        <th>Medium</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot></tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <p id="view_report">CONFIRM</p>
           </div>
         </div>
-        <div class="dom_block invoice_table">
-          <div class="dom_block_item w100 oodo table">
-            <div class="dom_table">
-              <div class="dom_table_head">
-                <h2>
-                  <i class="fa-solid fa-file-invoice-dollar title_icon"></i>
-                  Next Pay Invoice
-                </h2>
-                <div class="dow_oodo_btns">
-                  <div class="dom_show_chartbtns invoice_table">
-                    <p class="active">Table</p>
-                    <p>Chart</p>
-                  </div>
-                  <p id="ex_invoice_table">
-                    <i class="fa-solid fa-file-excel"></i>
-                  </p>
-                </div>
-              </div>
-              <canvas id="nextChart"></canvas>
-              <div class="dom_table_box">
-                <div class="dom_table_container">
-                  <table id="invoice_table" class="table invoice">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Program</th>
-                        <th>Next Invoice</th>
-                        <th>Next Pay</th>
-                        <th>Debt (1)</th>
-                        <th>Total Paid (2)</th>
-                        <th>Revenue (1+2)</th>
-                        <th>Saleperson</th>
-                        <th>Source</th>
-                        <th>Campaign</th>
-                        <th>Medium</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot></tfoot>
-                  </table>
-                </div>
-              </div>
+        <div class="dom_accounts_edit">
+          <div class="dom_accounts_add_head">
+            <img
+              class="dom_login_avatar"
+              src="https://ampersand-reports-dom.netlify.app/DOM-img/DOM_LOGO.png"
+            />
+            <i class="fa-solid fa-circle-chevron-left dom_close"></i>
+          </div>
+          <div class="dom_form_wrapper">
+            <div class="dom_accounts_list_item">
+              <div class="dom_edit_info"></div>
             </div>
+            <label class="dom_key_check" for="key_check">
+              <input type="checkbox" id="key_check" />
+              <span>Quick Filter by Keyword or Brand</span>
+            </label>
+
+            <label for="key_adset">
+              <span>Keyword in Adset (separated by ",")</span>
+              <input type="text" id="key_adset" />
+            </label>
+
+            <p id="confirm_keyword">CONFIRM</p>
           </div>
         </div>
-        <div class="dom_block expected_table">
-          <div class="dom_block_item w100 oodo table">
-            <div class="dom_table">
-              <div class="dom_table_head">
-                <h2>Expected in Month</h2>
-              </div>
-              <div class="dom_table_box">
-                <div class="dom_table_container">
-                  <table id="expected_table" class="table oodo expected">
-                    <thead>
-                      <tr>
-                        <th>Expected Date</th>
-                        <th>Create Date</th>
-                        <th>Days Expected</th>
-                        <th>Program</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Stage</th>
-                        <th>Expected in month</th>
-                        <th>Probability</th>
-                        <th>Saleperson</th>
-                        <th>Source</th>
-                        <th>Campaign</th>
-                        <th>Medium</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                    <tfoot></tfoot>
-                  </table>
-                </div>
-              </div>
-            </div>
+        <div class="dom_accounts_import">
+          <div class="dom_accounts_add_head">
+            <img
+              class="dom_login_avatar"
+              src="https://ampersand-reports-dom.netlify.app/DOM-img/DOM_LOGO.png"
+            />
+            <i class="fa-solid fa-circle-chevron-left dom_close"></i>
           </div>
-        </div>
-        <div class="dom_block">
-          <div class="dom_block_item w100">
-            <h2>Won by month</h2>
-            <canvas id="wonChart"></canvas>
+          <div class="dom_form_wrapper">
+            <span>Paste your quick import code</span>
+            <textarea id="import_code"></textarea>
+
+            <p id="confirm_import">IMPORT</p>
           </div>
         </div>
       </div>
+      <div class="dom_accounts_overlay"></div>
+      <div class="dom_alert">
+        <div class="dom_accounts_head">
+          <img src="https://dom-marketing.netlify.app/img/DOM_LOGO.png" />
+          <p class="dom_alert_title">Terms of use</p>
+        </div>
+        <div class="dom_alert_inner">
+          <div class="dom_alert_content"></div>
+          <p id="dom_checked">CONFIRM</p>
+          <div class="dom_confirm">
+            <p id="confirm_close">Connect an ID</p>
+            <p id="confirm_ok">Continute Connect All</p>
+          </div>
+        </div>
+      </div>
+      <div class="dom_alert_overlay"></div>
       <div class="loading">
         <span class="loader"></span>
       </div>
     </main>
     <script src="./domvar.js"></script>
-    <script src="https://dom-marketing.netlify.app/SAVE/dom.js"></script>
+    <script src="https://dom-marketing.netlify.app//SAVE/dom.js"></script>
   </body>
 </html>
-
-
